@@ -155,10 +155,7 @@ void BauSystemB::memoryRoutingTableWriteIndication(Priority priority, HopCountTy
     printHex("=>", data, number);
     _memory.writeMemory(memoryAddress, number, data);
     if (_deviceObj.verifyMode())
-    {
-        print("Sending Read indicatiion");
         memoryRoutingTableReadIndication(priority, hopType, asap, secCtrl, number, memoryAddress, data);
-    }
 }
 
 //
