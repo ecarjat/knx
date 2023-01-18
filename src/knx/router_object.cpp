@@ -470,7 +470,7 @@ bool RouterObject::isGroupAddressInFilterTable(uint16_t groupAddress)
 
     uint8_t filterTableUse = 0x00;
     if (property(PID_FILTER_TABLE_USE)->read(filterTableUse) == 0)
-        return false;
+        return true; // TODO: change once filter is correctly loaded
 
     if ((filterTableUse&0x01) == 1)
     {

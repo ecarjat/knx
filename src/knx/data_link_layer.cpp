@@ -102,6 +102,11 @@ void DataLinkLayer::frameReceived(CemiFrame& frame)
     }
 #endif
 
+    // print("Frame received destination: ");
+    // print(destination, 16);
+    // println();
+    // print("frameReceived: frame valid? :");
+    // println(npdu.frame().valid() ? "true" : "false");
     if (source == ownAddr)
         _deviceObject.individualAddressDuplication(true);
 
@@ -121,6 +126,8 @@ void DataLinkLayer::frameReceived(CemiFrame& frame)
 bool DataLinkLayer::sendTelegram(NPDU & npdu, AckType ack, uint16_t destinationAddr, AddressType addrType, uint16_t sourceAddr, FrameFormat format, Priority priority, SystemBroadcast systemBroadcast)
 {
     CemiFrame& frame = npdu.frame();
+    // print("Send telegram frame valid ?: ");
+    // println(frame.valid()?"true":"false");
     frame.messageCode(L_data_ind);
     frame.destinationAddress(destinationAddr);
     frame.sourceAddress(sourceAddr);
@@ -137,8 +144,8 @@ bool DataLinkLayer::sendTelegram(NPDU & npdu, AckType ack, uint16_t destinationA
 
     if (!frame.valid())
     {
-        println("invalid frame");
-        return false;
+        println("invalid frame, sending nonetheless");
+       
     }
 
 //    if (frame.npdu().octetCount() > 0)
